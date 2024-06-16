@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
+using MoreLinq;
 using OpenMod.API.Commands;
 using OpenMod.API.Plugins;
 using OpenMod.Core.Commands;
@@ -20,9 +21,11 @@ namespace RoleplayCommands
     public class CommandDo : OpenMod.Core.Commands.Command
     {
         private readonly RoleplayCommands m_plugin;
-        public CommandDo(RoleplayCommands plugin,  IServiceProvider serviceProvider) : base(serviceProvider)
+        private readonly IUnturnedUserDirectory m_unturnedUserDirectory;
+        public CommandDo(IUnturnedUserDirectory unturnedUserDirectory, RoleplayCommands plugin, IServiceProvider serviceProvider) : base(serviceProvider)
         {
             m_plugin = plugin;
+            m_unturnedUserDirectory = unturnedUserDirectory;
         }
 
         protected override async Task OnExecuteAsync()
@@ -31,8 +34,14 @@ namespace RoleplayCommands
             if (Context.Parameters.Count == 0) throw new CommandWrongUsageException(Context);
             string entorno = string.Join(" ", Context.Parameters);
             var config = m_plugin.config.Do;
-            await UniTask.SwitchToMainThread();
-            ChatManager.say($"{config.Prefix} {user.Player.Player.channel.owner.playerID.characterName.TrimStart()}: <color={config.Text}>{entorno}", Color.white, true);
+            m_unturnedUserDirectory.GetOnlineUsers()
+                .ForEach(x =>
+                {
+                    if ((user.Player.Player.transform.position - x.Player.Player.transform.position).sqrMagnitude < 25f * 25f)
+                    {
+                        x.Player.PrintMessageAsync($"{config.Prefix} {user.Player.Player.channel.owner.playerID.characterName.TrimStart()}: <color={config.Text}>{entorno}", System.Drawing.Color.White);
+                    }
+                });
             await UniTask.CompletedTask;
         }
     }

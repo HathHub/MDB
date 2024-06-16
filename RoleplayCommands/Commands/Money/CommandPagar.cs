@@ -36,7 +36,7 @@ namespace RoleplayCommands
             target.Player.Player.skills.askAward(amount);
 
 
-            await target.PrintMessageAsync($"<color=#8EFF56>[MDB Economy]</color> <color=#FFFFFF>El jugador</color> {target.Player.Player.channel.owner.playerID.characterName} <color=#FFFFFF>te ha transferido</color> {amount}$");
+            await target.PrintMessageAsync($"<color=#8EFF56>[MDB Economy]</color> <color=#FFFFFF>El jugador</color> {user.Player.Player.channel.owner.playerID.characterName} <color=#FFFFFF>te ha transferido</color> {amount}$");
             await user.PrintMessageAsync($"<color=#8EFF56>[MDB Economy]</color> <color=#FFFFFF>Has transferido</color> {amount}$ <color=#FFFFFF>al jugador</color> {target.Player.Player.channel.owner.playerID.characterName}");
             await UniTask.CompletedTask;
         }

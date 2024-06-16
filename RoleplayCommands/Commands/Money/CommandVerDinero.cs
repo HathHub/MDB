@@ -32,10 +32,11 @@ namespace RoleplayCommands
 
         protected override async Task OnExecuteAsync()
         {
+            UnturnedUser user = (UnturnedUser)Context.Actor;
             UnturnedUser target = m_userDirectory.FindUser(await Context.Parameters.GetAsync<string>(0), OpenMod.API.Users.UserSearchMode.FindByNameOrId);
             if(target == null) throw new UserFriendlyException("Jugador no encontrado.");
 
-            await target.PrintMessageAsync($"<color=#8EFF56>[MDB Economy]</color> <color=#FFFFFF>El jugador</color> {target.Player.Player.channel.owner.playerID.characterName} <color=#FFFFFF>tiene</color> {target.Player.Player.skills.experience}$");
+            await user.PrintMessageAsync($"<color=#8EFF56>[MDB Economy]</color> <color=#FFFFFF>El jugador</color> {target.Player.Player.channel.owner.playerID.characterName} <color=#FFFFFF>tiene</color> {target.Player.Player.skills.experience}$");
             await UniTask.CompletedTask;
         }
     }
