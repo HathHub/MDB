@@ -1,0 +1,35 @@
+# See https://openmod.github.io/openmod-docs/devdoc/concepts/configuration.html
+# You can delete this file if you do not need a configuration
+
+Config:
+  commands:
+    anon:
+      prefix: "<color=#FF5733>[ANON]</color>"
+      text: "#FF5733"
+    do:
+      prefix: "<color=#FF5733>[DO]</color>"
+      text: "#33FF57"
+    entorno:
+      prefix: "<color=#FF5733>[ENTORNO]</color>"
+      text: "#3357FF"
+    me:
+      prefix: "<color=#FF5733>[ME]</color>"
+      text: "#57FF33"
+    ooc:
+      prefix: "<color=#FF5733>[OOC]</color>"
+      text: "#5733FF"
+    policia:
+      prefix: "<color=#FF5733>[POLICIA]</color>"
+      text: "#33FFF5"
+    samu:
+      prefix: "<color=#FF5733>[SAMU]</color>"
+      text: "#FF3357"
+    twitter:
+      prefix: "<color=#FF5733>[TWITTER]</color>"
+      text: "#FF5733"
+    staff:
+      prefix: "<color=#FF5733>[STAFF]</color>"
+      text: "#33FF57"
+    mecanico:
+      prefix: "<color=#FF5733>[MECANICO]</color>"
+      text: "#3357FF"
